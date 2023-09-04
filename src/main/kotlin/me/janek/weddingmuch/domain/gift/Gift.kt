@@ -1,4 +1,4 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.gift
 
 import jakarta.persistence.*
 
