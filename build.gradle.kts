@@ -67,6 +67,7 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
+
 node {
   version = "16.14.2"
   distBaseUrl = "https://nodejs.org/dist"
@@ -94,7 +95,7 @@ val buildReactTask by tasks.registering(NpmTask::class) {
 val copyTask by tasks.registering(Copy::class) {
   dependsOn(buildReactTask)
   from(file("${project.projectDir}/frontend/build"))
-  into(file("${project.buildDir}/main/resources/static"))
+  into(file("${project.buildDir}/resources/main/static"))
 }
 
 tasks.bootJar {
