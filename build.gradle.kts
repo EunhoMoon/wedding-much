@@ -1,3 +1,4 @@
+import com.moowork.gradle.node.npm.NpmTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,6 +8,7 @@ plugins {
   kotlin("plugin.spring") version "1.8.22"
   kotlin("plugin.jpa") version "1.8.22"
   kotlin("kapt") version "1.8.22"
+  id("com.github.node-gradle.node") version "2.2.4"
   idea
 }
 
@@ -41,10 +43,10 @@ dependencies {
   runtimeOnly("com.h2database:h2")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-  implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-  kapt ("com.querydsl:querydsl-apt:5.0.0:jakarta")
-  kapt ("jakarta.annotation:jakarta.annotation-api")
-  kapt ("jakarta.persistence:jakarta.persistence-api")
+  implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+  kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+  kapt("jakarta.annotation:jakarta.annotation-api")
+  kapt("jakarta.persistence:jakarta.persistence-api")
 }
 
 idea {
@@ -65,4 +67,36 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
+node {
+  version = "16.14.2"
+  distBaseUrl = "https://nodejs.org/dist"
 
+  workDir = file("${project.buildDir}/nodejs")
+  nodeModulesDir = file("${project.projectDir}")
+  npmWorkDir = file("${project.buildDir}/npm")
+}
+
+val installDependencies by tasks.registering(NpmTask::class) {
+  setArgs(listOf("install"))
+  setExecOverrides(closureOf<ExecSpec> {
+    setWorkingDir("${project.projectDir}/frontend")
+  })
+}
+
+val buildReactTask by tasks.registering(NpmTask::class) {
+  dependsOn(installDependencies)
+  setArgs(listOf("run", "build"))
+  setExecOverrides(closureOf<ExecSpec> {
+    setWorkingDir("${project.projectDir}/frontend")
+  })
+}
+
+val copyTask by tasks.registering(Copy::class) {
+  dependsOn(buildReactTask)
+  from(file("${project.projectDir}/frontend/build"))
+  into(file("${project.buildDir}/main/resources/static"))
+}
+
+tasks.bootJar {
+  dependsOn(copyTask)
+}
