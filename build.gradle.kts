@@ -13,7 +13,6 @@ plugins {
 }
 
 group = "me.janek"
-version = "0.0.1-SNAPSHOT"
 
 allOpen {
   annotation("jakarta.persistence.Entity")
