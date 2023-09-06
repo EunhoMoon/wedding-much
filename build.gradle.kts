@@ -24,6 +24,7 @@ java {
   sourceCompatibility = JavaVersion.VERSION_17
 }
 
+
 repositories {
   mavenCentral()
 }
@@ -99,4 +100,8 @@ val copyTask by tasks.registering(Copy::class) {
 
 tasks.bootJar {
   dependsOn(copyTask)
+}
+
+tasks.jar {
+  enabled = false
 }
