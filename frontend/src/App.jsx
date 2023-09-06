@@ -1,17 +1,30 @@
 import './App.css';
-import {Button, TextField} from "@mui/material";
+import {Container, CssBaseline, Pagination} from "@mui/material";
+import InputForm from "./component/InputForm";
+import Header from "./component/Header";
+import GiftTable from "./component/GiftTable";
+import {useState} from "react";
 
 function App() {
+  const [page, setPage] = useState(1);
+
+  function pageChangeHandler(event, value) {
+    setPage(value)
+  }
+
   return (
     <div className="App">
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-        <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-          <TextField style={{margin: '0 5px'}} name="name" label="이름" variant="outlined" size="small" color="success"/>
-          <TextField style={{margin: '0 5px'}}  name="price" label="금액" variant="outlined" size="small" color="success" type="number"/>
-          <TextField style={{margin: '0 5px'}}  name="memo" label="비고" variant="outlined" size="small" color="success"/>
-          <Button variant="outlined" style={{margin: '0 5px'}} color="success" >저장</Button>
-        </div>
-      </div>
+      <CssBaseline/>
+      <Header/>
+      <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
+        <InputForm/>
+      </Container>
+      <Container style={{marginTop: 50, display: 'flex', justifyContent: 'center'}}>
+        <GiftTable/>
+      </Container>
+      <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
+        <Pagination count={10} size="small" page={page} onChange={pageChangeHandler}/>
+      </Container>
     </div>
   );
 }
