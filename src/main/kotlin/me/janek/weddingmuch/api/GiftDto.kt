@@ -2,20 +2,20 @@ package me.janek.weddingmuch.api
 
 import me.janek.weddingmuch.domain.Gift
 
-class CreateRequest(
+data class CreateRequest(
   val name: String,
   val price: Int,
   val memo: String?
 )
 
-class UpdateRequest(
+data class UpdateRequest(
   val name: String,
   val price: Int,
   val memo: String?,
   val token: String
 )
 
-class InfoResponse(
+data class InfoResponse(
   val name: String,
   val price: Int,
   val memo: String?,
