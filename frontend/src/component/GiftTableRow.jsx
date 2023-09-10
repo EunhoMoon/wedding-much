@@ -1,5 +1,5 @@
 import React from 'react';
-import {TableCell, TableRow} from "@mui/material";
+import {Button, TableCell, TableRow} from "@mui/material";
 
 const GiftTableRow = props => {
   const {num, gift} = props
@@ -8,7 +8,10 @@ const GiftTableRow = props => {
       <TableCell align="center">{num}</TableCell>
       <TableCell align="center">{gift.name}</TableCell>
       <TableCell align="center">{gift.memo}</TableCell>
-      <TableCell align="right" style={{paddingRight: '10%'}}>{gift.price.toLocaleString()}</TableCell>
+      <TableCell align="right">{gift.price.toLocaleString()}</TableCell>
+      <TableCell align="center">
+        <Button>삭제</Button>
+      </TableCell>
     </TableRow>
   );
 };

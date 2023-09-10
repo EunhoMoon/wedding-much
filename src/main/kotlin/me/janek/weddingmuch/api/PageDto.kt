@@ -12,20 +12,20 @@ class PageCond(
   val offset: Long = (page - 1) * size
 }
 
-class Pageable<T>(
+open class Pageable<T>(
 
-  val total: Long,
+  var total: Long,
 
   @JsonIgnore
-  val pageCond: PageCond,
+  var pageCond: PageCond,
 
-  val list: List<T>
+  var list: List<T>
 
 ) {
 
-  val pageCount = total / pageCond.size + if (total % pageCond.page > 0) 1 else 0
+  open var pageCount = total / pageCond.size + if (total % pageCond.page > 0) 1 else 0
     get() = if (field == 0L) 1 else field
 
-  val presentPages = pageCond.page
+  open var presentPages = pageCond.page
 
 }

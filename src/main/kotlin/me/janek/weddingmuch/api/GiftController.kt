@@ -31,10 +31,10 @@ class GiftController(
   }
 
   @GetMapping
-  fun getAllGifts(pageCond: PageCond): ResponseEntity<Pageable<InfoResponse>> {
+  fun getAllGifts(pageCond: PageCond): ResponseEntity<GiftPageable> {
     val list = giftService.getGiftList(pageCond).map(InfoResponse.Companion::of)
     val total = giftService.getTotalGift()
-    val giftPageable = Pageable(total, pageCond, list)
+    val giftPageable = GiftPageable(total, pageCond, list)
 
     return ResponseEntity.status(HttpStatus.OK).body(giftPageable)
   }

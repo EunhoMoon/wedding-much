@@ -30,3 +30,11 @@ data class InfoResponse(
     )
   }
 }
+
+class GiftPageable(
+  total: Long,
+  pageCond: PageCond,
+  list: List<InfoResponse>
+) : Pageable<InfoResponse>(total, pageCond, list) {
+  val totalPrice: Int = list.map(InfoResponse::price).sum()
+}

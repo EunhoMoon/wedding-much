@@ -12,14 +12,17 @@ const GiftTable = props => {
           <TableHead>
             <TableRow>
               <TableCell style={{width: '6%'}}>#</TableCell>
-              <TableCell align='center' style={{width: '30%'}}>
+              <TableCell align='center' style={{width: '25%'}}>
                 이름
               </TableCell>
-              <TableCell align='center' style={{width: '33%'}}>
+              <TableCell align='center' style={{width: '38%'}}>
                 비고
               </TableCell>
-              <TableCell align='center' style={{width: '30%'}}>
+              <TableCell align='center' style={{width: '15%'}}>
                 금액
+              </TableCell>
+              <TableCell align='center' style={{width: '10%'}}>
+                삭제
               </TableCell>
             </TableRow>
           </TableHead>

@@ -16,6 +16,7 @@ function App() {
   const [pages, setPages] = useState({
     pageCount: 1,
     total: 0,
+    totalPrice: 0,
     presentPages: 1
   });
   const pagePerNum = pages.total - ((presentPage - 1) * pageSize);
@@ -66,8 +67,10 @@ function App() {
           <Container style={{marginTop: 50, display: 'flex', justifyContent: 'center'}}>
             <div style={{width: '70%'}}>
               <div style={{display: "flex", justifyContent: 'space-between'}}>
-                <p>총: {pages.total}명</p>
-                <p>1200 만원</p>
+                <div style={{display: "flex", justifyContent: 'flex-start'}}>
+                  <p>총: {pages.total}명 /</p>
+                  <p style={{marginLeft: 5}}>{pages.totalPrice.toLocaleString()}원</p>
+                </div>
               </div>
               <GiftTable gifts={gifts} total={pagePerNum}/>
             </div>

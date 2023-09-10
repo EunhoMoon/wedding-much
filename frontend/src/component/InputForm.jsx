@@ -13,12 +13,17 @@ const InputForm = props => {
   });
 
   const setProperties = (e) => {
-    setNewGift({...newGift, [e.target.name] : e.target.value})
+    setNewGift({...newGift, [e.target.name] : e.target.value});
   }
 
   const submitHandler = e => {
     e.preventDefault();
     props.onGiftSave(newGift);
+    setNewGift({
+      name: '',
+      price: '',
+      memo: ''
+    })
   }
 
   return (
