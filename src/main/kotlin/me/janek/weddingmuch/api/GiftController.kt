@@ -3,7 +3,9 @@ package me.janek.weddingmuch.api
 import me.janek.weddingmuch.domain.GiftService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,17 +19,9 @@ class GiftController(
 
   @PostMapping
   fun saveGift(@RequestBody create: CreateRequest): ResponseEntity<String> {
-    print(create)
-    var status = HttpStatus.CREATED
-    var result = "success"
-    try {
-      giftService.saveNewGift(create)
-    } catch (e: RuntimeException) {
-      status = HttpStatus.INTERNAL_SERVER_ERROR
-      result = e.localizedMessage
-    }
+    giftService.saveNewGift(create)
 
-    return ResponseEntity.status(status).body(result)
+    return ResponseEntity.status(HttpStatus.CREATED).body("success")
   }
 
   @GetMapping
@@ -37,6 +31,13 @@ class GiftController(
     val giftPageable = GiftPageable(total, pageCond, list)
 
     return ResponseEntity.status(HttpStatus.OK).body(giftPageable)
+  }
+
+  @DeleteMapping("/{gift-token}")
+  fun deleteGift(@PathVariable("gift-token") giftToken: String): ResponseEntity<String> {
+    giftService.deleteGift(giftToken)
+
+    return ResponseEntity.status(HttpStatus.OK).body("success")
   }
 
 }

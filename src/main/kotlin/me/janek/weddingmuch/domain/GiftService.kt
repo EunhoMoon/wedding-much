@@ -11,4 +11,6 @@ interface GiftService {
 
   fun getTotalGift(): Long
 
+  fun deleteGift(giftToken: String)
+
 }

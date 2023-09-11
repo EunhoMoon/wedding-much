@@ -3,7 +3,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 import GiftTableRow from "./GiftTableRow";
 
 const GiftTable = props => {
-  const {gifts, total} = props;
+  const {gifts, total, onDeleteHandler} = props;
 
   return (
     <Paper sx={{width: '100%', overflow: 'hidden'}}>
@@ -28,7 +28,7 @@ const GiftTable = props => {
           </TableHead>
           <TableBody>
             {gifts && gifts.length > 0 && gifts.map((gift, _idx) => {
-              return <GiftTableRow key={_idx} num={total - _idx} gift={gift}/>
+              return <GiftTableRow key={_idx} num={total - _idx} gift={gift} onDeleteHandler={onDeleteHandler}/>
             })}
           </TableBody>
         </Table>

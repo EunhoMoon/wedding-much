@@ -22,4 +22,7 @@ class GiftServiceImpl(
 
   override fun getTotalGift(): Long = giftRepository.count()
 
+  @Transactional
+  override fun deleteGift(giftToken: String) = giftRepository.deleteByToken(giftToken)
+
 }

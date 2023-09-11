@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 @SpringBootTest
-class GiftServiceImplTest @Autowired constructor (
+class GiftServiceImplTest @Autowired constructor(
   private val giftService: GiftService,
   private val giftRepository: GiftRepository
 ) {
@@ -27,6 +27,19 @@ class GiftServiceImplTest @Autowired constructor (
     // then
     val allGift = giftService.getGiftList(PageCond())
     assertEquals(allGift[0].name, "Janek")
+  }
+
+  @Test
+  fun `Token을 통한 삭제가 정상적으로 이루어진다`() {
+    // given
+    val newGiftToken = Gift.of(CreateRequest(name = "Janek", price = 100_000, memo = null)).token
+
+    // when
+    giftService.deleteGift(newGiftToken)
+
+    //then
+    val count = giftRepository.count()
+    assertEquals(count, 0)
   }
 
 }

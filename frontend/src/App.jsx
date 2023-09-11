@@ -45,7 +45,21 @@ function App() {
   const saveGiftHandler = async (gift) => {
     try {
       let response = await axios.post(`/api/gifts`, gift);
-      getGiftsHandler();
+      if (response.status === 201) {
+        getGiftsHandler();
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const deleteGiftHandler = async (token) => {
+    try {
+      let response = await axios.delete(`/api/gifts/${token}`);
+      if (response.status === 200) {
+        alert("정상적으로 삭제되었습니다.");
+        getGiftsHandler();
+      }
     } catch (e) {
       console.log(e)
     }
@@ -72,7 +86,7 @@ function App() {
                   <p style={{marginLeft: 5}}>{pages.totalPrice.toLocaleString()}원</p>
                 </div>
               </div>
-              <GiftTable gifts={gifts} total={pagePerNum}/>
+              <GiftTable gifts={gifts} total={pagePerNum} onDeleteHandler={deleteGiftHandler}/>
             </div>
           </Container>
           <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
