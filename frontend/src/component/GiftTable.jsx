@@ -11,17 +11,17 @@ const GiftTable = props => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell style={{width: '6%'}}>#</TableCell>
+              <TableCell align="center" style={{width: '10%'}}>#</TableCell>
               <TableCell align='center' style={{width: '25%'}}>
                 이름
               </TableCell>
-              <TableCell align='center' style={{width: '38%'}}>
+              <TableCell align='center' style={{width: '35%'}}>
                 비고
               </TableCell>
               <TableCell align='center' style={{width: '15%'}}>
                 금액
               </TableCell>
-              <TableCell align='center' style={{width: '10%'}}>
+              <TableCell align='center' style={{width: '15%'}}>
                 삭제
               </TableCell>
             </TableRow>
@@ -30,6 +30,7 @@ const GiftTable = props => {
             {gifts && gifts.length > 0 && gifts.map((gift, _idx) => {
               return <GiftTableRow key={_idx} num={total - _idx} gift={gift} onDeleteHandler={onDeleteHandler}/>
             })}
+            {gifts.length <= 0 && <TableRow><TableCell colSpan={5} align="center">데이터를 입력하세요.</TableCell></TableRow>}
           </TableBody>
         </Table>
       </TableContainer>
