@@ -1,10 +1,11 @@
-import './App.css';
-import {Container, CssBaseline, Pagination} from "@mui/material";
+import {CircularProgress, CssBaseline, Pagination} from "@mui/material";
 import InputForm from "./component/InputForm";
 import Header from "./component/Header";
 import GiftTable from "./component/GiftTable";
 import {Fragment, useCallback, useEffect, useState} from "react";
 import axios from "axios";
+import GiftHeader from "./component/GiftHeader";
+import classes from './css/App.module.css';
 
 const pageSize = 10;
 
@@ -35,7 +36,7 @@ function App() {
       setError(error.message);
     }
 
-    setIsLoading(false);
+    setIsLoading(false)
   }, [presentPage]);
 
   const pageChangeHandler = (event, value) => {
@@ -46,7 +47,7 @@ function App() {
     try {
       let response = await axios.post(`/api/gifts`, gift);
       if (response.status === 201) {
-        getGiftsHandler();
+        await getGiftsHandler();
       }
     } catch (e) {
       console.log(e)
@@ -73,32 +74,26 @@ function App() {
     <div className="App">
       <CssBaseline/>
       <Header/>
-      <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
+      <div className={classes.wrapper}>
         <InputForm onGiftSave={saveGiftHandler}/>
-      </Container>
+      </div>
       {!error && (
         <Fragment>
-          <Container style={{marginTop: 50, display: 'flex', justifyContent: 'center'}}>
-            <div style={{width: '70%'}}>
-              <div style={{display: "flex", justifyContent: 'space-between'}}>
-                <div style={{display: "flex", justifyContent: 'flex-start'}}>
-                  <p>총: {pages.total}명 /</p>
-                  <p style={{marginLeft: 5}}>{pages.totalPrice.toLocaleString()}원</p>
-                </div>
+          <div className={classes.tableOuter}>
+            {!isLoading && (
+              <div className={classes.tableInner}>
+                <GiftHeader total={pages.total} totalPrice={pages.totalPrice}/>
+                <GiftTable gifts={gifts} total={pagePerNum} onDeleteHandler={deleteGiftHandler}/>
               </div>
-              <GiftTable gifts={gifts} total={pagePerNum} onDeleteHandler={deleteGiftHandler}/>
-            </div>
-          </Container>
-          <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
+            )}
+            {isLoading && <CircularProgress/>}
+          </div>
+          <div className={classes.wrapper}>
             <Pagination count={pages.pageCount} size="small" page={presentPage} onChange={pageChangeHandler}/>
-          </Container>
+          </div>
         </Fragment>
       )}
-      {error && (
-        <Container style={{marginTop: 30, display: 'flex', justifyContent: 'center'}}>
-          <p>데이터 로딩에 실패하였습니다.</p>
-        </Container>
-      )}
+      {error && <div className={classes.wrapper}><p>데이터 로딩에 실패하였습니다.</p></div>}
     </div>
   );
 }

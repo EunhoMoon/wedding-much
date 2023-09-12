@@ -22,7 +22,6 @@ const InputForm = props => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-      <input type="text"/>
       <TextField style={{margin: '0 5px'}} name="name" label="이름" variant="outlined" size="small" color="success"
                  value={newGift.name} onChange={setProperties}/>
       <TextField style={{margin: '0 5px'}} name="price" label="금액" variant="outlined" size="small" color="success"
