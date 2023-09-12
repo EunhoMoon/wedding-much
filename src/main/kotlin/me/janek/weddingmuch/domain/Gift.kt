@@ -31,9 +31,9 @@ class Gift(
 
   companion object {
     fun of(request: CreateRequest): Gift = Gift(
-      name = request.name,
+      name = request.name!!,
       memo = request.memo,
-      price = request.price,
+      price = request.price!!,
       token = UUID.randomUUID().toString()
     )
   }

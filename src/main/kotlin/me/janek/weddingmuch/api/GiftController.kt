@@ -1,5 +1,6 @@
 package me.janek.weddingmuch.api
 
+import jakarta.validation.Valid
 import me.janek.weddingmuch.domain.GiftService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,7 +19,7 @@ class GiftController(
 ) {
 
   @PostMapping
-  fun saveGift(@RequestBody create: CreateRequest): ResponseEntity<String> {
+  fun saveGift(@RequestBody @Valid create: CreateRequest): ResponseEntity<String> {
     giftService.saveNewGift(create)
 
     return ResponseEntity.status(HttpStatus.CREATED).body("success")

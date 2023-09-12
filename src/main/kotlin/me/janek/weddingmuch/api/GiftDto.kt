@@ -1,18 +1,15 @@
 package me.janek.weddingmuch.api
 
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 import me.janek.weddingmuch.domain.Gift
 
 data class CreateRequest(
-  val name: String,
-  val price: Int,
+  @field:NotEmpty(message = "이름은 필수입니다.")
+  val name: String?,
+  @field:NotNull(message = "가격은 필수입니다.")
+  val price: Int?,
   val memo: String?
-)
-
-data class UpdateRequest(
-  val name: String,
-  val price: Int,
-  val memo: String?,
-  val token: String
 )
 
 data class InfoResponse(
