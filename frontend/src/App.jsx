@@ -28,10 +28,11 @@ function App() {
 
   const getGiftsHandler = useCallback(async () => {
     setIsLoading(true);
+    console.log(sort)
 
     try {
       let response = await axios
-        .get(`/api/gifts?page=${presentPage}&size=${pageSize}&sort=${sort.by},${sort.direction}`);
+        .get(`/api/gifts?page=${presentPage}&size=${pageSize}&sort=${sort.by}&direction=${sort.direction}`);
 
       const {list, ...rest} = response.data
 
@@ -42,7 +43,7 @@ function App() {
     }
 
     setIsLoading(false)
-  }, [presentPage]);
+  }, [presentPage, sort]);
 
   const pageChangeHandler = (event, value) => {
     setPresentPage(value)
@@ -72,8 +73,10 @@ function App() {
   }
 
   const sortingGiftsHandler = async (by, direction) => {
+    console.log({by, direction})
     setSort({by, direction});
     setPresentPage(1);
+    getGiftsHandler();
   }
 
   useEffect(() => {
@@ -93,7 +96,8 @@ function App() {
             {!isLoading && (
               <div className={classes.tableInner}>
                 <GiftHeader total={pages.total} totalPrice={pages.totalPrice}/>
-                <GiftTable gifts={gifts} total={pagePerNum} sort={sort} onDelete={deleteGiftHandler} onSorting={sortingGiftsHandler}/>
+                <GiftTable gifts={gifts} total={pagePerNum} sort={sort} onDelete={deleteGiftHandler}
+                           onSorting={sortingGiftsHandler}/>
               </div>
             )}
             {isLoading && <CircularProgress/>}
