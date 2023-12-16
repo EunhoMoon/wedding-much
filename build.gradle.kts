@@ -69,39 +69,40 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
-
-node {
-  version = "16.14.2"
-  distBaseUrl = "https://nodejs.org/dist"
-
-  workDir = file("${project.buildDir}/nodejs")
-  nodeModulesDir = file("${project.projectDir}")
-  npmWorkDir = file("${project.buildDir}/npm")
-}
-
-val installDependencies by tasks.registering(NpmTask::class) {
-  setArgs(listOf("install"))
-  setExecOverrides(closureOf<ExecSpec> {
-    setWorkingDir("${project.projectDir}/frontend")
-  })
-}
-
-val buildReactTask by tasks.registering(NpmTask::class) {
-  dependsOn(installDependencies)
-  setArgs(listOf("run", "build"))
-  setExecOverrides(closureOf<ExecSpec> {
-    setWorkingDir("${project.projectDir}/frontend")
-  })
-}
-
-val copyTask by tasks.registering(Copy::class) {
-  dependsOn(buildReactTask)
-  from(file("${project.projectDir}/frontend/build"))
-  into(file("${project.buildDir}/resources/main/static"))
-}
+//
+//node {
+//  version = "16.14.2"
+//  distBaseUrl = "https://nodejs.org/dist"
+//
+//  workDir = file("${project.buildDir}/nodejs")
+//  nodeModulesDir = file("${project.projectDir}")
+//  npmWorkDir = file("${project.buildDir}/npm")
+//}
+//
+//val installDependencies by tasks.registering(NpmTask::class) {
+//  setArgs(listOf("install"))
+//  setExecOverrides(closureOf<ExecSpec> {
+//    setWorkingDir("${project.projectDir}/frontend")
+//  })
+//}
+//
+//val buildReactTask by tasks.registering(NpmTask::class) {
+//  dependsOn(installDependencies)
+//  setArgs(listOf("run", "build"))
+//  setExecOverrides(closureOf<ExecSpec> {
+//    setWorkingDir("${project.projectDir}/frontend")
+//  })
+//}
+//
+//val copyTask by tasks.registering(Copy::class) {
+//  dependsOn(buildReactTask)
+//  from(file("${project.projectDir}/frontend/build"))
+//  into(file("${project.buildDir}/resources/main/static"))
+//}
 
 tasks.bootJar {
-  dependsOn(copyTask)
+//  dependsOn(copyTask)
+  dependsOn()
 }
 
 tasks.jar {
