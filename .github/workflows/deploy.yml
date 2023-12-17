@@ -25,5 +25,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wedding-much
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wedding
           platforms: linux/amd64
