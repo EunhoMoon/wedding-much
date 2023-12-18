@@ -2,10 +2,12 @@ import React from 'react';
 import {Button, TableCell, TableRow} from "@mui/material";
 
 const GiftTableRow = props => {
-  const {num, gift, onDeleteHandler} = props
+  const {num, gift, onDelete} = props
 
   const deleteGiftHandler = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) onDeleteHandler(gift.token);
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      onDelete(gift.token)
+    };
   }
 
   return (
