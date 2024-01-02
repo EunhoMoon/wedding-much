@@ -12,7 +12,7 @@ class GlobalExceptionHandler {
   @ResponseBody
   @ExceptionHandler(value = [MethodArgumentNotValidException::class])
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<Map<String, String>> {
-    val errors = e.bindingResult.fieldErrors.map { it.field to it.defaultMessage!! }.toMap()
+    val errors = e.bindingResult.fieldErrors.associate { it.field to it.defaultMessage!! }
     return ResponseEntity.badRequest().body(errors)
   }
 
