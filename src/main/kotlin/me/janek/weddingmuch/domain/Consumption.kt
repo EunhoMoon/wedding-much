@@ -11,6 +11,7 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "consumptions")
 class Consumption(
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   val id: Long? = 0,
@@ -20,5 +21,12 @@ class Consumption(
 
   @Column(nullable = false)
   val place: String,
+
+  @Column(nullable = false)
+  val price: Int,
+
+  @Column(nullable = true)
+  val memo: String?,
+
 ) {
 }
