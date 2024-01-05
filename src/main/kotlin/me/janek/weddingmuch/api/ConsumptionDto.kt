@@ -1,7 +1,7 @@
 package me.janek.weddingmuch.api
 
-data class CreateRequest(
-  val name: String,
+data class ConsumptionCreateRequest(
+  val place: String,
   val price: Int
 ) {
 }

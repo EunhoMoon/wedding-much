@@ -19,7 +19,7 @@ class GiftController(
 ) {
 
   @PostMapping
-  fun saveGift(@RequestBody @Valid create: CreateRequest): ResponseEntity<String> {
+  fun saveGift(@RequestBody @Valid create: GiftCreateRequest): ResponseEntity<String> {
     giftService.saveNewGift(create)
 
     return ResponseEntity.status(HttpStatus.CREATED).body("success")

@@ -1,6 +1,6 @@
 package me.janek.weddingmuch.domain
 
-import me.janek.weddingmuch.api.CreateRequest
+import me.janek.weddingmuch.api.GiftCreateRequest
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.infrastructure.GiftRepository
 import org.junit.jupiter.api.Assertions.*
@@ -19,7 +19,7 @@ class GiftServiceImplTest @Autowired constructor(
   @Test
   fun `정상적으로 Gift를 저장한다`() {
     // given
-    val request = CreateRequest(name = "Janek", price = 10_000, memo = null)
+    val request = GiftCreateRequest(name = "Janek", price = 10_000, memo = null)
 
     // when
     giftService.saveNewGift(request)
@@ -32,7 +32,7 @@ class GiftServiceImplTest @Autowired constructor(
   @Test
   fun `Token을 통한 삭제가 정상적으로 이루어진다`() {
     // given
-    val newGiftToken = Gift.of(CreateRequest(name = "Janek", price = 100_000, memo = null)).token
+    val newGiftToken = Gift.of(GiftCreateRequest(name = "Janek", price = 100_000, memo = null)).token
 
     // when
     giftService.deleteGift(newGiftToken)

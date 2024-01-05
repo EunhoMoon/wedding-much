@@ -1,6 +1,6 @@
 package me.janek.weddingmuch.domain
 
-import me.janek.weddingmuch.api.CreateRequest
+import me.janek.weddingmuch.api.GiftCreateRequest
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.infrastructure.GiftRepository
 import org.springframework.stereotype.Service
@@ -13,7 +13,7 @@ class GiftServiceImpl(
 ) : GiftService {
 
   @Transactional
-  override fun saveNewGift(createRequest: CreateRequest) {
+  override fun saveNewGift(createRequest: GiftCreateRequest) {
     val newGift = Gift.of(createRequest)
     giftRepository.save(newGift)
   }

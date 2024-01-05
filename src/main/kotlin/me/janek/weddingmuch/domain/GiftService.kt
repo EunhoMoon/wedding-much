@@ -1,11 +1,11 @@
 package me.janek.weddingmuch.domain
 
-import me.janek.weddingmuch.api.CreateRequest
+import me.janek.weddingmuch.api.GiftCreateRequest
 import me.janek.weddingmuch.api.PageCond
 
 interface GiftService {
 
-  fun saveNewGift(createRequest: CreateRequest)
+  fun saveNewGift(createRequest: GiftCreateRequest)
 
   fun getGiftList(pageCond: PageCond): List<Gift>
 

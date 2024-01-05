@@ -1,7 +1,7 @@
 package me.janek.weddingmuch.domain
 
 import jakarta.persistence.*
-import me.janek.weddingmuch.api.CreateRequest
+import me.janek.weddingmuch.api.GiftCreateRequest
 import java.util.UUID
 
 @Entity
@@ -30,7 +30,7 @@ class Gift(
   }
 
   companion object {
-    fun of(request: CreateRequest): Gift = Gift(
+    fun of(request: GiftCreateRequest): Gift = Gift(
       name = request.name!!,
       memo = request.memo,
       price = request.price!!,
