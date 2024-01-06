@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import me.janek.weddingmuch.api.ConsumptionCreateRequest
+import java.util.UUID
 
 
 @Entity
@@ -29,4 +31,13 @@ class Consumption(
   val memo: String?,
 
 ) {
+
+  companion object {
+    fun of(request: ConsumptionCreateRequest): Consumption = Consumption(
+      place = request.place!!,
+      price = request.price!!,
+      memo = request.memo,
+      token = UUID.randomUUID().toString()
+    )
+  }
 }
