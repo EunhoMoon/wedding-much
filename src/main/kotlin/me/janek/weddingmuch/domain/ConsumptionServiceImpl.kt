@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class ConsumptionServiceImpl(
   private val consumptionRepository: ConsumptionRepository
-): ConsumptionService {
+) : ConsumptionService {
 
   @Transactional
   override fun saveNewConsumption(createRequest: ConsumptionCreateRequest) {
@@ -18,16 +18,10 @@ class ConsumptionServiceImpl(
     consumptionRepository.save(newConsumption)
   }
 
-  override fun getConsumptionList(pageCond: PageCond): List<Consumption> {
-    TODO("Not yet implemented")
-  }
+  override fun getConsumptionList(pageCond: PageCond): List<Consumption> = consumptionRepository.findAllConsumptions(pageCond)
 
-  override fun getTotalConsumption(): Long {
-    TODO("Not yet implemented")
-  }
+  override fun getTotalConsumption(): Long = consumptionRepository.count()
 
-  override fun deleteConsumption(consumptionToken: String) {
-    TODO("Not yet implemented")
-  }
+  override fun deleteConsumption(consumptionToken: String) = consumptionRepository.deleteByToken(consumptionToken)
 
 }
