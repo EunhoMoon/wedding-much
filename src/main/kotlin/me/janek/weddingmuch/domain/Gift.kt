@@ -2,6 +2,7 @@ package me.janek.weddingmuch.domain
 
 import jakarta.persistence.*
 import me.janek.weddingmuch.api.GiftCreateRequest
+import me.janek.weddingmuch.api.GiftUpdateRequest
 import java.util.UUID
 
 @Entity
@@ -16,12 +17,12 @@ class Gift(
   val token: String,
 
   @Column(nullable = false)
-  val name: String,
+  var name: String,
 
   @Column(nullable = true)
-  val price: Int,
+  var price: Int,
 
-  val memo: String?,
+  var memo: String?,
 
   ) {
 
@@ -36,5 +37,13 @@ class Gift(
       price = request.price!!,
       token = UUID.randomUUID().toString()
     )
+  }
+
+  fun update(request: GiftUpdateRequest) {
+    if (request.name.isNullOrBlank()) throw IllegalArgumentException("이름을 입력해주세요.")
+    request.price ?: throw IllegalArgumentException("이름을 입력해주세요.")
+    this.name = request.name
+    this.memo = request.memo
+    this.price = request.price
   }
 }

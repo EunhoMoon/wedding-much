@@ -19,8 +19,10 @@ class GiftServiceImpl(
     giftRepository.save(newGift)
   }
 
+  @Transactional
   override fun updateGift(updateRequest: GiftUpdateRequest) {
-    // TODO: implement updateGift
+    val gift = giftRepository.findByToken(updateRequest.token!!) ?: throw IllegalArgumentException("Gift not found with token: ${updateRequest.token}")
+    gift.update(updateRequest)
   }
 
   override fun getGiftList(pageCond: PageCond): List<Gift> = giftRepository.findAllGifts(pageCond)
