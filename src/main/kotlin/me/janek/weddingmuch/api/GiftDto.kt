@@ -10,17 +10,16 @@ data class GiftCreateRequest(
   @field:NotNull(message = "가격은 필수입니다.")
   val price: Int?,
   val memo: String?
-) {
-}
+)
 
-data class InfoResponse(
+data class GiftInfoResponse(
   val name: String,
   val price: Int,
   val memo: String?,
   val token: String
 ) {
   companion object {
-    fun of(gift: Gift): InfoResponse = InfoResponse(
+    fun of(gift: Gift): GiftInfoResponse = GiftInfoResponse(
       name = gift.name,
       price = gift.price,
       memo = gift.memo,
@@ -32,7 +31,7 @@ data class InfoResponse(
 class GiftPageable(
   total: Long,
   pageCond: PageCond,
-  list: List<InfoResponse>
-) : Pageable<InfoResponse>(total, pageCond, list) {
-  val totalPrice: Int = list.map(InfoResponse::price).sum()
+  list: List<GiftInfoResponse>
+) : Pageable<GiftInfoResponse>(total, pageCond, list) {
+  val totalPrice: Int = list.map(GiftInfoResponse::price).sum()
 }
