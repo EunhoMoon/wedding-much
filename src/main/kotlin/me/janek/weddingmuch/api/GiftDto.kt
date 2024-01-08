@@ -12,6 +12,16 @@ data class GiftCreateRequest(
   val memo: String?
 )
 
+data class GiftUpdateRequest(
+  @field:NotNull(message = "토큰은 필수입니다.")
+  val token: String?,
+  @field:NotEmpty(message = "이름은 필수입니다.")
+  val name: String?,
+  @field:NotNull(message = "가격은 필수입니다.")
+  val price: Int?,
+  val memo: String?
+)
+
 data class GiftInfoResponse(
   val name: String,
   val price: Int,

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface GiftRepository : JpaRepository<Gift, Long>, GiftRepositoryCustom {
 
+  fun findByToken(giftToken: String): Gift?
+
   fun deleteByToken(giftToken: String)
 
 }

@@ -1,6 +1,7 @@
 package me.janek.weddingmuch.domain
 
 import me.janek.weddingmuch.api.GiftCreateRequest
+import me.janek.weddingmuch.api.GiftUpdateRequest
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.infrastructure.GiftRepository
 import org.springframework.stereotype.Service
@@ -16,6 +17,10 @@ class GiftServiceImpl(
   override fun saveNewGift(createRequest: GiftCreateRequest) {
     val newGift = Gift.of(createRequest)
     giftRepository.save(newGift)
+  }
+
+  override fun updateGift(updateRequest: GiftUpdateRequest) {
+    // TODO: implement updateGift
   }
 
   override fun getGiftList(pageCond: PageCond): List<Gift> = giftRepository.findAllGifts(pageCond)
