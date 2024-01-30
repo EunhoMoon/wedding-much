@@ -3,7 +3,8 @@ package me.janek.weddingmuch.domain
 import me.janek.weddingmuch.api.GiftCreateRequest
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.infrastructure.GiftRepository
-import org.junit.jupiter.api.Assertions.*
+import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,7 +18,8 @@ class GiftServiceImplTest @Autowired constructor(
 ) {
 
   @Test
-  fun `정상적으로 Gift를 저장한다`() {
+  @DisplayName("축의금 내역 저장이 정상 작동한다.")
+  fun save() {
     // given
     val request = GiftCreateRequest(name = "Janek", price = 10_000, memo = null)
 
@@ -25,12 +27,12 @@ class GiftServiceImplTest @Autowired constructor(
     giftService.saveNewGift(request)
 
     // then
-    val allGift = giftService.getGiftList(PageCond())
-    assertEquals(allGift[0].name, "Janek")
+    assertThat(giftService.getGiftList(PageCond())[0].name).isEqualTo("Janek")
   }
 
   @Test
-  fun `Token을 통한 삭제가 정상적으로 이루어진다`() {
+  @DisplayName("토큰을 통한 축의금 내역 삭제가 정상 작동한다.")
+  fun delete() {
     // given
     val newGiftToken = Gift.of(GiftCreateRequest(name = "Janek", price = 100_000, memo = null)).token
 
@@ -38,8 +40,7 @@ class GiftServiceImplTest @Autowired constructor(
     giftService.deleteGift(newGiftToken)
 
     //then
-    val count = giftRepository.count()
-    assertEquals(count, 0)
+    assertThat(giftRepository.count()).isEqualTo(0)
   }
 
 }
