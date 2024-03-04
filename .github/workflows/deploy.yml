@@ -26,4 +26,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: eunhomoon/wedding
-          platforms: linux/arm64/v8
+          platforms: linux/amd64
