@@ -60,6 +60,10 @@ function App() {
     }
   }
 
+  const updateGiftHandler = async (newGift) => {
+
+  }
+
   const deleteGiftHandler = async (token) => {
     try {
       let response = await axios.delete(`/api/gifts/${token}`);

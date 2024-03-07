@@ -22,13 +22,16 @@ const GiftTable = props => {
               <TableCell align='center' id="name" onClick={changeSortingHandler} style={{width: '25%'}}>
                 이름
               </TableCell>
-              <TableCell align='center' style={{width: '35%'}}>
+              <TableCell align='center' style={{width: '30%'}}>
                 비고
               </TableCell>
               <TableCell align='center' id="price" onClick={changeSortingHandler} style={{width: '15%'}}>
                 금액
               </TableCell>
-              <TableCell align='center' style={{width: '15%'}}>
+              <TableCell align='center' style={{width: '10%'}}>
+                수정
+              </TableCell>
+              <TableCell align='center' style={{width: '10%'}}>
                 삭제
               </TableCell>
             </TableRow>
