@@ -1,7 +1,11 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.gift
 
 import me.janek.weddingmuch.api.*
-import me.janek.weddingmuch.infrastructure.GiftRepository
+import me.janek.weddingmuch.api.gift.GiftCreateRequest
+import me.janek.weddingmuch.api.gift.GiftInfoResponse
+import me.janek.weddingmuch.api.gift.GiftPageable
+import me.janek.weddingmuch.api.gift.GiftUpdateRequest
+import me.janek.weddingmuch.infrastructure.gift.GiftRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

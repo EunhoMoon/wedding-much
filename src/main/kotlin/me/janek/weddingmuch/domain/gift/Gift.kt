@@ -1,8 +1,8 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.gift
 
 import jakarta.persistence.*
-import me.janek.weddingmuch.api.GiftCreateRequest
-import me.janek.weddingmuch.api.GiftUpdateRequest
+import me.janek.weddingmuch.api.gift.GiftCreateRequest
+import me.janek.weddingmuch.api.gift.GiftUpdateRequest
 import java.util.UUID
 
 @Entity
@@ -41,7 +41,7 @@ class Gift(
 
   fun update(request: GiftUpdateRequest) {
     if (request.name.isNullOrBlank()) throw IllegalArgumentException("이름을 입력해주세요.")
-    request.price ?: throw IllegalArgumentException("이름을 입력해주세요.")
+    request.price ?: throw IllegalArgumentException("금액을 입력해주세요.")
     this.name = request.name
     this.memo = request.memo
     this.price = request.price

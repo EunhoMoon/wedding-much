@@ -1,8 +1,8 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.gift
 
-import me.janek.weddingmuch.api.GiftCreateRequest
-import me.janek.weddingmuch.api.GiftPageable
-import me.janek.weddingmuch.api.GiftUpdateRequest
+import me.janek.weddingmuch.api.gift.GiftCreateRequest
+import me.janek.weddingmuch.api.gift.GiftPageable
+import me.janek.weddingmuch.api.gift.GiftUpdateRequest
 import me.janek.weddingmuch.api.PageCond
 
 interface GiftService {

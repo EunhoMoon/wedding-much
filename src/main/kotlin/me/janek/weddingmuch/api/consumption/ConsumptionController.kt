@@ -1,6 +1,7 @@
-package me.janek.weddingmuch.api
+package me.janek.weddingmuch.api.consumption
 
-import me.janek.weddingmuch.domain.ConsumptionService
+import me.janek.weddingmuch.api.PageCond
+import me.janek.weddingmuch.domain.consumption.ConsumptionService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

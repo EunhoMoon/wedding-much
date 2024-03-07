@@ -1,7 +1,7 @@
-package me.janek.weddingmuch.infrastructure
+package me.janek.weddingmuch.infrastructure.gift
 
 import me.janek.weddingmuch.api.PageCond
-import me.janek.weddingmuch.domain.Gift
+import me.janek.weddingmuch.domain.gift.Gift
 
 interface GiftRepositoryCustom {
 

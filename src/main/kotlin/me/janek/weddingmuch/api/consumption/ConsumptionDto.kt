@@ -1,8 +1,10 @@
-package me.janek.weddingmuch.api
+package me.janek.weddingmuch.api.consumption
 
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
-import me.janek.weddingmuch.domain.Consumption
+import me.janek.weddingmuch.api.PageCond
+import me.janek.weddingmuch.api.Pageable
+import me.janek.weddingmuch.domain.consumption.Consumption
 
 data class ConsumptionCreateRequest(
   @field:NotEmpty(message = "소비내역은 필수입니다.")

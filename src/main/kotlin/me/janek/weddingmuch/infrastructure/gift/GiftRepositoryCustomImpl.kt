@@ -1,11 +1,11 @@
-package me.janek.weddingmuch.infrastructure
+package me.janek.weddingmuch.infrastructure.gift
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import me.janek.weddingmuch.api.Direction
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.api.Sort
-import me.janek.weddingmuch.domain.Gift
-import me.janek.weddingmuch.domain.QGift.gift
+import me.janek.weddingmuch.domain.gift.Gift
+import me.janek.weddingmuch.domain.gift.QGift.gift
 
 class GiftRepositoryCustomImpl(
   private val queryFactory: JPAQueryFactory

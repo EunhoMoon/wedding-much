@@ -1,10 +1,10 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.gift
 
 import me.janek.weddingmuch.IntegrationTestSupport
-import me.janek.weddingmuch.api.GiftCreateRequest
-import me.janek.weddingmuch.api.GiftUpdateRequest
+import me.janek.weddingmuch.api.gift.GiftCreateRequest
+import me.janek.weddingmuch.api.gift.GiftUpdateRequest
 import me.janek.weddingmuch.api.PageCond
-import me.janek.weddingmuch.infrastructure.GiftRepository
+import me.janek.weddingmuch.infrastructure.gift.GiftRepository
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

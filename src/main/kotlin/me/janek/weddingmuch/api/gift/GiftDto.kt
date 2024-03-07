@@ -1,8 +1,10 @@
-package me.janek.weddingmuch.api
+package me.janek.weddingmuch.api.gift
 
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
-import me.janek.weddingmuch.domain.Gift
+import me.janek.weddingmuch.api.PageCond
+import me.janek.weddingmuch.api.Pageable
+import me.janek.weddingmuch.domain.gift.Gift
 
 data class GiftCreateRequest(
   @field:NotEmpty(message = "이름은 필수입니다.")

@@ -1,7 +1,7 @@
-package me.janek.weddingmuch.infrastructure
+package me.janek.weddingmuch.infrastructure.consumption
 
 import me.janek.weddingmuch.api.PageCond
-import me.janek.weddingmuch.domain.Consumption
+import me.janek.weddingmuch.domain.consumption.Consumption
 
 interface ConsumptionRepositoryCustom {
 

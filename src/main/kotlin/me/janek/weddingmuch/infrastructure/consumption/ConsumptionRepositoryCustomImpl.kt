@@ -1,11 +1,13 @@
-package me.janek.weddingmuch.infrastructure
+package me.janek.weddingmuch.infrastructure.consumption
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import me.janek.weddingmuch.api.Direction
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.api.Sort
-import me.janek.weddingmuch.domain.Consumption
-import me.janek.weddingmuch.domain.QConsumption.consumption
+import me.janek.weddingmuch.domain.consumption.Consumption
+import me.janek.weddingmuch.domain.consumption.QConsumption.consumption
+
+//import me.janek.weddingmuch.domain.QConsumption.consumption
 
 class ConsumptionRepositoryCustomImpl(
   private val queryFactory: JPAQueryFactory

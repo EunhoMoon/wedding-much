@@ -1,8 +1,8 @@
-package me.janek.weddingmuch.domain
+package me.janek.weddingmuch.domain.consumption
 
-import me.janek.weddingmuch.api.ConsumptionCreateRequest
+import me.janek.weddingmuch.api.consumption.ConsumptionCreateRequest
 import me.janek.weddingmuch.api.PageCond
-import me.janek.weddingmuch.infrastructure.ConsumptionRepository
+import me.janek.weddingmuch.infrastructure.consumption.ConsumptionRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

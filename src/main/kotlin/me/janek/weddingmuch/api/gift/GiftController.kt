@@ -1,7 +1,8 @@
-package me.janek.weddingmuch.api
+package me.janek.weddingmuch.api.gift
 
 import jakarta.validation.Valid
-import me.janek.weddingmuch.domain.GiftService
+import me.janek.weddingmuch.api.PageCond
+import me.janek.weddingmuch.domain.gift.GiftService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -27,7 +28,7 @@ class GiftController(
   }
 
   @PutMapping
-  fun updateGift(update: GiftUpdateRequest): ResponseEntity<String> {
+  fun updateGift(@RequestBody @Valid update: GiftUpdateRequest): ResponseEntity<String> {
     giftService.updateGift(update)
 
     return ResponseEntity.status(HttpStatus.OK).body("success")
