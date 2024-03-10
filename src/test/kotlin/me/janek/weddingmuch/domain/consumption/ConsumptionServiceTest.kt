@@ -72,8 +72,8 @@ class ConsumptionServiceTest @Autowired constructor(
   fun getConsumptionList() {
     // given
     val consumption1 = ConsumptionCreateRequest("스드메", 3_000_000, "스드메 비용")
-    val consumption2 = ConsumptionCreateRequest("웨딩링", 3_000_000, "스드메 비용")
-    val consumption3 = ConsumptionCreateRequest("항공권", 2_500_000, "스드메 비용")
+    val consumption2 = ConsumptionCreateRequest("웨딩링", 3_000_000, "웨딩링 비용")
+    val consumption3 = ConsumptionCreateRequest("항공권", 2_500_000, "항공권 비용")
     consumptionRepository.saveAll(
       listOf(
         Consumption.of(consumption1),
