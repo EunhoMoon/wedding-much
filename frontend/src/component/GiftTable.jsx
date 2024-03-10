@@ -3,7 +3,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 import GiftTableRow from "./GiftTableRow";
 
 const GiftTable = props => {
-  const {gifts, total, sort, onDelete, onSorting} = props;
+  const {gifts, total, sort, onDelete, onUpdate, onSorting} = props;
 
   const changeSortingHandler = (e) => {
     const by = e.target.id.toUpperCase();
@@ -38,7 +38,7 @@ const GiftTable = props => {
           </TableHead>
           <TableBody>
             {gifts && gifts.length > 0 && gifts.map((gift, _idx) => {
-              return <GiftTableRow key={_idx} num={total - _idx} gift={gift} onDelete={onDelete}/>
+              return <GiftTableRow key={_idx} num={total - _idx} gift={gift} onDelete={onDelete} onUpdate={onUpdate}/>
             })}
             {gifts.length <= 0 && <TableRow><TableCell colSpan={5} align="center">데이터를 입력하세요.</TableCell></TableRow>}
           </TableBody>

@@ -61,17 +61,27 @@ function App() {
   }
 
   const updateGiftHandler = async (newGift) => {
-
+    try {
+      const response = await axios.put(`/api/gifts`, newGift);
+      if (response.status === 200) {
+        await getGiftsHandler();
+        alert("정상적으로 수정되었습니다.");
+      }
+    } catch (e) {
+      alert("수정에 실패하였습니다.");
+      console.log(e)
+    }
   }
 
   const deleteGiftHandler = async (token) => {
     try {
       let response = await axios.delete(`/api/gifts/${token}`);
       if (response.status === 200) {
+        await getGiftsHandler();
         alert("정상적으로 삭제되었습니다.");
-        getGiftsHandler();
       }
     } catch (e) {
+      alert("삭제에 실패하였습니다.");
       console.log(e)
     }
   }
@@ -100,7 +110,9 @@ function App() {
             {!isLoading && (
               <div className={classes.tableInner}>
                 <GiftHeader total={pages.total} totalPrice={pages.totalPrice}/>
-                <GiftTable gifts={gifts} total={pagePerNum} sort={sort} onDelete={deleteGiftHandler}
+                <GiftTable gifts={gifts} total={pagePerNum} sort={sort}
+                           onDelete={deleteGiftHandler}
+                           onUpdate={updateGiftHandler}
                            onSorting={sortingGiftsHandler}/>
               </div>
             )}

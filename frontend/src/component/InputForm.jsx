@@ -25,7 +25,7 @@ const InputForm = props => {
       <TextField style={{margin: '0 5px'}} name="name" label="이름" variant="outlined" size="small" color="success"
                  value={newGift.name} onChange={setProperties}/>
       <TextField style={{margin: '0 5px'}} name="price" label="금액" variant="outlined" size="small" color="success"
-                 value={newGift.price} onChange={setProperties}/>
+                 value={newGift.price} onChange={setProperties} type="number"/>
       <TextField style={{margin: '0 5px'}} name="memo" label="비고" variant="outlined" size="small" color="success"
                  value={newGift.memo} onChange={setProperties}/>
       <Button type="submit" variant="outlined" style={{margin: '0 5px'}} color="success"
