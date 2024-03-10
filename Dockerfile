@@ -19,5 +19,5 @@ FROM --platform=linux/amd64 amazoncorretto:17
 WORKDIR /app
 # Copy the built JAR from the build-java stage
 COPY --from=build-spring /backend/build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-Dspring-profiles.active=prod", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
 
