@@ -1,20 +1,18 @@
 package me.janek.weddingmuch.domain.gift
 
 import me.janek.weddingmuch.IntegrationTestSupport
+import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.api.gift.GiftCreateRequest
 import me.janek.weddingmuch.api.gift.GiftUpdateRequest
-import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.infrastructure.gift.GiftRepository
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Transactional
-@SpringBootTest
 class GiftServiceTest @Autowired constructor(
   private val giftService: GiftService,
   private val giftRepository: GiftRepository
