@@ -87,13 +87,13 @@ class ConsumptionServiceTest @Autowired constructor(
 
     //then
     assertThat(consumptionList.total).isEqualTo(3)
-    assertThat(consumptionList.totalPrice).isEqualTo(8500_000)
+    assertThat(consumptionList.totalPrice).isEqualTo(8_500_000)
     assertThat(consumptionList.list).hasSize(3)
       .extracting("place", "price")
       .containsExactlyInAnyOrder(
-        tuple("스드메", 3000_000),
-        tuple("웨딩링", 3000_000),
-        tuple("항공권", 2500_000)
+        tuple("스드메", 3_000_000),
+        tuple("웨딩링", 3_000_000),
+        tuple("항공권", 2_500_000)
       )
   }
 
