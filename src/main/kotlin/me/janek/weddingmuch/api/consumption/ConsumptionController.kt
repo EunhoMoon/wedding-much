@@ -24,9 +24,7 @@ class ConsumptionController(
 
   @GetMapping
   fun getAllConsumptions(pageCond: PageCond): ResponseEntity<ConsumptionPageable> {
-    val list = consumptionService.getConsumptionList(pageCond).map(ConsumptionInfoResponse.Companion::of)
-    val total = consumptionService.getTotalConsumption()
-    val consumptionPageable = ConsumptionPageable(total, pageCond, list)
+    val consumptionPageable = consumptionService.getAllConsumption(pageCond)
 
     return ResponseEntity.status(HttpStatus.OK).body(consumptionPageable)
   }
