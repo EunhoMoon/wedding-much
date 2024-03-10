@@ -15,7 +15,7 @@ data class GiftCreateRequest(
 )
 
 data class GiftUpdateRequest(
-  @field:NotNull(message = "토큰은 필수입니다.")
+  @field:NotEmpty(message = "토큰은 필수입니다.")
   val token: String?,
   @field:NotEmpty(message = "이름은 필수입니다.")
   val name: String?,
