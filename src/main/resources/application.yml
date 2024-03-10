@@ -17,10 +17,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://wedding-db:3306/wedding
+    username: root
+    password: 1234
 
 ---
 spring:
