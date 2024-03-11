@@ -1,6 +1,6 @@
 package me.janek.weddingmuch.domain.gift
 
-import me.janek.weddingmuch.api.*
+import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.api.gift.GiftCreateRequest
 import me.janek.weddingmuch.api.gift.GiftInfoResponse
 import me.janek.weddingmuch.api.gift.GiftPageable
@@ -17,8 +17,7 @@ class GiftServiceImpl(
 
   @Transactional
   override fun saveNewGift(createRequest: GiftCreateRequest) {
-    val newGift = Gift.of(createRequest)
-    giftRepository.save(newGift)
+    Gift.of(createRequest).let { giftRepository.save(it) }
   }
 
   @Transactional
