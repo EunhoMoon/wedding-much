@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.post
-import org.springframework.test.web.servlet.put
+import org.springframework.test.web.servlet.*
 import java.util.UUID
 
 @WebMvcTest(controllers = arrayOf(GiftController::class))
@@ -150,6 +147,18 @@ class GiftControllerTest @Autowired constructor(
       .andExpect { jsonPath("$.pageCount") { value(1) } }
       .andExpect { jsonPath("$.presentPages") { value(1) } }
       .andExpect { jsonPath("$.totalPrice") { value(0) } }
+  }
+
+  @Test
+  @DisplayName("축의 내역을 삭제한다.")
+  fun deleteGift() {
+      // given
+      val giftToken = UUID.randomUUID().toString()
+
+      // expect
+      mockMvc.delete("/api/gifts/$giftToken")
+        .andDo { print() }
+        .andExpect { status { isOk() } }
   }
 
 }

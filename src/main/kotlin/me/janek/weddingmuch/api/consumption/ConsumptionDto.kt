@@ -7,19 +7,19 @@ import me.janek.weddingmuch.api.Pageable
 import me.janek.weddingmuch.domain.consumption.Consumption
 
 data class ConsumptionCreateRequest(
-  @field:NotEmpty(message = "소비내역은 필수입니다.")
+  @field:NotEmpty(message = "소비 내역은 필수입니다.")
   val place: String?,
-  @field:NotNull(message = "소비금액은 필수입니다.")
+  @field:NotNull(message = "소비 금액은 필수입니다.")
   val price: Int?,
   val memo: String?
 )
 
 data class ConsumptionUpdateRequest(
-  @field:NotNull(message = "토큰은 필수입니다.")
+  @field:NotEmpty(message = "토큰은 필수입니다.")
   val token: String?,
-  @field:NotEmpty(message = "소비내역은 필수입니다.")
+  @field:NotEmpty(message = "소비 내역은 필수입니다.")
   val place: String?,
-  @field:NotNull(message = "소비금액은 필수입니다.")
+  @field:NotNull(message = "소비 금액은 필수입니다.")
   val price: Int?,
   val memo: String?
 )
