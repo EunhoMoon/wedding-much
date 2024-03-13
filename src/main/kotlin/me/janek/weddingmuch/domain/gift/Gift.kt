@@ -3,6 +3,7 @@ package me.janek.weddingmuch.domain.gift
 import jakarta.persistence.*
 import me.janek.weddingmuch.api.gift.GiftCreateRequest
 import me.janek.weddingmuch.api.gift.GiftUpdateRequest
+import me.janek.weddingmuch.domain.BaseEntity
 import java.util.UUID
 
 @Entity
@@ -24,7 +25,7 @@ class Gift(
 
   var memo: String?,
 
-  ) {
+  ): BaseEntity() {
 
   init {
     if (name.isBlank()) throw IllegalArgumentException("이름을 입력해주세요.")

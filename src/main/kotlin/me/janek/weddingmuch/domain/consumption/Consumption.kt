@@ -3,6 +3,7 @@ package me.janek.weddingmuch.domain.consumption
 import jakarta.persistence.*
 import me.janek.weddingmuch.api.consumption.ConsumptionCreateRequest
 import me.janek.weddingmuch.api.consumption.ConsumptionUpdateRequest
+import me.janek.weddingmuch.domain.BaseEntity
 import java.util.*
 
 
@@ -26,7 +27,7 @@ class Consumption(
   @Column(nullable = true)
   var memo: String?,
 
-  ) {
+  ): BaseEntity() {
 
   companion object {
     fun of(request: ConsumptionCreateRequest): Consumption = Consumption(
