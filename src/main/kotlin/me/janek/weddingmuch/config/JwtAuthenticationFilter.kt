@@ -3,10 +3,13 @@ package me.janek.weddingmuch.config
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import me.janek.weddingmuch.utils.JwtProvider
+import org.slf4j.LoggerFactory
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
-class JwtAuthenticationFilter constructor(
-//  private val jwtTokenProvider: JwtTokenProvider
+class JwtAuthenticationFilter(
+  private val jwtProvider: JwtProvider
 ) : OncePerRequestFilter() {
 
   companion object {
@@ -14,19 +17,28 @@ class JwtAuthenticationFilter constructor(
     private const val TOKEN_PREFIX = "Bearer "
   }
 
+  private val log = LoggerFactory.getLogger(JwtAuthenticationFilter::class.java)
+
   override fun doFilterInternal(
     request: HttpServletRequest,
     response: HttpServletResponse,
     filterChain: FilterChain
   ) {
-    val authorizationHeader = request.getHeader(HEADER_AUTHORIZATION)
-    val token = getAccessToken(authorizationHeader)
+    val token = getAccessToken(request.getHeader(HEADER_AUTHORIZATION))
+
+    if (token.isNotEmpty() && jwtProvider.verifyToken(token)) {
+      jwtProvider.getAuthentication(token).let { SecurityContextHolder.getContext().authentication = it }
+    } else {
+      log.info("토큰이 유효하지 않습니다.")
+    }
+
+    filterChain.doFilter(request, response)
   }
 
-  private fun getAccessToken(authorizationHeader: String): String {
-    return authorizationHeader.startsWith(TOKEN_PREFIX).let {
+  private fun getAccessToken(authorizationHeader: String?) =
+    if (authorizationHeader != null && authorizationHeader.startsWith(TOKEN_PREFIX))
       authorizationHeader.substring(TOKEN_PREFIX.length)
-    }
-  }
+    else
+      ""
 
 }

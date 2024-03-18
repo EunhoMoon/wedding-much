@@ -3,7 +3,7 @@ package me.janek.weddingmuch.utils
 import me.janek.weddingmuch.IntegrationTestSupport
 import me.janek.weddingmuch.api.user.UserDetailsResponse
 import me.janek.weddingmuch.domain.user.User
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,9 +26,7 @@ class JwtProviderTest @Autowired constructor(
     // then
     generateToken
       .let { jwtProvider.verifyToken(it) }
-      .let {
-        Assertions.assertThat(it).isEqualTo("test")
-      }
+      .let { assertThat(it).isTrue }
   }
 
 }

@@ -7,4 +7,6 @@ interface UserService : UserDetailsService {
 
   fun saveNewUser(createRequest: UserCreateRequest)
 
+  fun getUserByToken(token: String): User
+
 }

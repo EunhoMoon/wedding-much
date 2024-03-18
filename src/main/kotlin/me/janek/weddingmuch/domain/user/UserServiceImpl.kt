@@ -24,6 +24,11 @@ class UserServiceImpl(
       .let { userRepository.save(it) }
   }
 
+  override fun getUserByToken(token: String): User {
+    return userRepository.findByToken(token)
+      ?: throw IllegalArgumentException("User not found with token: $token")
+  }
+
   override fun loadUserByUsername(username: String): UserDetails {
     return userRepository.findByUsername(username)
       ?.let { UserDetailsResponse.from(it) }
