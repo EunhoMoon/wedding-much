@@ -25,7 +25,7 @@ class UserDetailsResponse private constructor(
 ) : UserDetails {
 
   companion object {
-    fun from(user: User): UserDetails {
+    fun from(user: User): UserDetailsResponse {
       return UserDetailsResponse(
         token = user.token,
         username = user.username,
