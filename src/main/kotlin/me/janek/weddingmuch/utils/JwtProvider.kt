@@ -43,6 +43,8 @@ class JwtProvider(
   fun verifyToken(jwtToken: String): Boolean {
     try {
       getUserTokenFromJwtToken(jwtToken)
+
+      return true
     } catch (e: SecurityException) {
       log.info("잘못된 서명입니다.")
     } catch (e: MalformedJwtException) {
