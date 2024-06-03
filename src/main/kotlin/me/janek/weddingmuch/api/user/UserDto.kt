@@ -14,6 +14,14 @@ data class UserCreateRequest(
   val password: String,
 )
 
+data class UserLoginRequest(
+  @field:NotEmpty(message = "Email은 필수입니다.")
+  @field:Email(message = "Email 형식이 아닙니다.")
+  val email: String,
+  @field:NotEmpty(message = "비밀번호는 필수입니다.")
+  val password: String,
+)
+
 class UserDetailsResponse private constructor(
   var token: String,
   @JvmField
