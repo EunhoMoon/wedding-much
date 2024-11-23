@@ -8,7 +8,6 @@ plugins {
   kotlin("plugin.jpa") version "1.8.22"
   kotlin("kapt") version "1.8.22"
   id("com.github.node-gradle.node") version "2.2.4"
-  id("org.asciidoctor.jvm.convert") version "3.3.2"
   idea
 }
 
@@ -58,12 +57,7 @@ dependencies {
   implementation("io.jsonwebtoken:jjwt-api:0.12.5")
   implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
   implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
-
-  // spring rest docs
-  testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
-
-val snippetsDir by extra { file("build/generated-snippets") }
 
 idea {
   module {
@@ -90,32 +84,4 @@ tasks.bootJar {
 
 tasks.jar {
   enabled = false
-}
-
-tasks {
-  // Test 결과를 snippet Directory에 출력
-  test {
-    outputs.dir(snippetsDir)
-  }
-
-  asciidoctor {
-    dependsOn(test)
-
-    doFirst {
-      delete(file("src/main/resources/static/docs"))
-    }
-
-    inputs.dir(snippetsDir)
-
-    doLast {
-      copy {
-        from("build/docs/asciidoc")
-        into("src/main/resources/static/docs")
-      }
-    }
-  }
-
-  build {
-    dependsOn(asciidoctor)
-  }
 }
