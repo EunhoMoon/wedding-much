@@ -8,6 +8,7 @@ plugins {
   kotlin("plugin.jpa") version "1.8.22"
   kotlin("kapt") version "1.8.22"
   id("com.github.node-gradle.node") version "2.2.4"
+  id("org.asciidoctor.jvm.convert") version "3.3.2"
   idea
 }
 

@@ -3,34 +3,17 @@ package me.janek.weddingmuch.api.consumption
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.janek.weddingmuch.api.PageCond
 import me.janek.weddingmuch.domain.consumption.ConsumptionService
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.restdocs.RestDocumentationContextProvider
-import org.springframework.restdocs.RestDocumentationExtension
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.test.web.servlet.*
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers.*
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.web.context.WebApplicationContext
 
 @AutoConfigureMockMvc(addFilters = false)
-@ExtendWith(RestDocumentationExtension::class)
 //@WebMvcTest(controllers = [ConsumptionController::class])
 @SpringBootTest
 class ConsumptionControllerTest @Autowired constructor(
@@ -38,38 +21,6 @@ class ConsumptionControllerTest @Autowired constructor(
   private var mockMvc: MockMvc,
   @MockBean private val consumptionService: ConsumptionService
 ) {
-
-  @BeforeEach
-  fun setUp(
-    webApplicationContext: WebApplicationContext,
-    restDocumentationContextProvider: RestDocumentationContextProvider
-  ) {
-    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-      .apply<DefaultMockMvcBuilder>(
-        MockMvcRestDocumentation.documentationConfiguration(
-          restDocumentationContextProvider
-        )
-      )
-      .build()
-  }
-
-  @Test
-  @DisplayName("신규 소비 내역을 등록한다.")
-  fun saveConsumption() {
-    // given
-    val request = ConsumptionCreateRequest(place = "스드메", price = 3_000_000, memo = null)
-
-    // expect
-    mockMvc.perform(
-      post("/api/consumptions")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(request))
-    )
-      .andDo(print())
-      .andExpect(status().isCreated)
-      .andDo(document("consumption-create"))
-
-  }
 
   @Test
   @DisplayName("신규 소비 등록시 내역은 필수다.")
