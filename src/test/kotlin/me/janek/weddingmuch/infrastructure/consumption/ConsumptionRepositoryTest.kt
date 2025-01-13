@@ -20,9 +20,9 @@ class ConsumptionRepositoryTest @Autowired constructor(
   fun findAllConsumptions() {
     // given
     arrayOf(
-      Consumption(token = "token1", place = "place1", memo = null, price = 1_000),
-      Consumption(token = "token2", place = "place2", memo = "테스트", price = 2_000),
-      Consumption(token = "token3", place = "place3", memo = null, price = 3_000),
+      Consumption(token = "token1", place = "place1", memo = null, price = 1_000, userToken ="1"),
+      Consumption(token = "token2", place = "place2", memo = "테스트", price = 2_000, userToken ="1"),
+      Consumption(token = "token3", place = "place3", memo = null, price = 3_000, userToken ="1"),
     )
       .toList()
       .let { consumptionRepository.saveAll(it) }
@@ -43,7 +43,7 @@ class ConsumptionRepositoryTest @Autowired constructor(
   @DisplayName("토큰 값을 통해 축의 내역을 조회한다.")
   fun findByToken() {
     // given
-    Consumption(token = "token1", place = "place1", memo = null, price = 1_000)
+    Consumption(token = "token1", place = "place1", memo = null, price = 1_000, userToken ="1")
       .let { consumptionRepository.save(it) }
 
     // when
@@ -72,7 +72,7 @@ class ConsumptionRepositoryTest @Autowired constructor(
   @DisplayName("토큰 값을 통해 축의 내역을 삭제한다.")
   fun deleteByToken() {
     // given
-    Consumption(token = "token1", place = "place1", memo = null, price = 1_000)
+    Consumption(token = "token1", place = "place1", memo = null, price = 1_000, userToken ="1")
       .let { consumptionRepository.save(it) }
 
     // when

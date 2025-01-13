@@ -39,7 +39,7 @@ class GiftServiceTest @Autowired constructor(
   @DisplayName("축의금 내역이 정상 수정된다.")
   fun update() {
     // given
-    val newGift = Gift(name = "테스터", memo = null, price = 100_000, token = UUID.randomUUID().toString())
+    val newGift = Gift(name = "테스터", memo = null, price = 100_000, token = UUID.randomUUID().toString(), userToken ="1")
     giftRepository.save(newGift)
     val giftUpdateRequest = GiftUpdateRequest(newGift.token, name = "김테스", price = 100_000, memo = "수정")
 
@@ -56,7 +56,7 @@ class GiftServiceTest @Autowired constructor(
   @DisplayName("수정하고자 하는 축의금 내역을 찾을 수 없을 경우 예외 발생")
   fun updateFail() {
     // given
-    val newGift = Gift(name = "테스터", memo = null, price = 100_000, token = UUID.randomUUID().toString())
+    val newGift = Gift(name = "테스터", memo = null, price = 100_000, token = UUID.randomUUID().toString(), userToken ="1")
     giftRepository.save(newGift)
     val giftUpdateRequest = GiftUpdateRequest(token = "not_exist_token", name = "김테스", price = 100_000, memo = "수정")
 
@@ -70,7 +70,7 @@ class GiftServiceTest @Autowired constructor(
   @DisplayName("토큰을 통한 축의금 내역 삭제가 정상 작동한다.")
   fun delete() {
     // given
-    val newGiftToken = Gift.of(GiftCreateRequest(name = "Janek", price = 100_000, memo = null)).token
+    val newGiftToken = Gift.of(request = GiftCreateRequest(name = "Janek", price = 100_000, memo = null), userToken = "1").token
 
     // when
     giftService.deleteGift(newGiftToken)
@@ -83,9 +83,9 @@ class GiftServiceTest @Autowired constructor(
   @DisplayName("전체 축의 내역을 불러온다.")
   fun getAllGifts() {
     // given
-    val newGift1 = Gift(name = "테스터 김", memo = null, price = 100_000, token = UUID.randomUUID().toString())
-    val newGift2 = Gift(name = "테스터 이", memo = null, price = 30_000, token = UUID.randomUUID().toString())
-    val newGift3 = Gift(name = "테스터 박", memo = null, price = 50_000, token = UUID.randomUUID().toString())
+    val newGift1 = Gift(name = "테스터 김", memo = null, price = 100_000, token = UUID.randomUUID().toString(), userToken ="1")
+    val newGift2 = Gift(name = "테스터 이", memo = null, price = 30_000, token = UUID.randomUUID().toString(), userToken ="1")
+    val newGift3 = Gift(name = "테스터 박", memo = null, price = 50_000, token = UUID.randomUUID().toString(), userToken ="1")
     giftRepository.saveAll(listOf(newGift1, newGift2, newGift3))
 
     // when

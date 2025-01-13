@@ -14,7 +14,7 @@ class ConsumptionTest {
     val createRequest = ConsumptionCreateRequest(place = "스드메", price = 3000_000, memo = "계좌이체")
 
     // when
-    val newConsumption = Consumption.of(createRequest)
+    val newConsumption = Consumption.of(createRequest, userToken ="1")
 
     //then
     assertThat(newConsumption.token).isNotBlank()

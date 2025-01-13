@@ -27,14 +27,18 @@ class Consumption(
   @Column(nullable = true)
   var memo: String?,
 
+  @Column(nullable = false)
+  var userToken: String
+
   ): BaseEntity() {
 
   companion object {
-    fun of(request: ConsumptionCreateRequest): Consumption = Consumption(
+    fun of(request: ConsumptionCreateRequest, userToken: String): Consumption = Consumption(
       place = request.place!!,
       price = request.price!!,
       memo = request.memo,
-      token = UUID.randomUUID().toString()
+      token = UUID.randomUUID().toString(),
+      userToken = userToken
     )
   }
 

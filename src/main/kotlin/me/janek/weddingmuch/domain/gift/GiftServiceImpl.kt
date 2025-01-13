@@ -17,7 +17,7 @@ class GiftServiceImpl(
 
   @Transactional
   override fun saveNewGift(createRequest: GiftCreateRequest) {
-    Gift.of(createRequest).let { giftRepository.save(it) }
+    Gift.of(createRequest, "1").let { giftRepository.save(it) }
   }
 
   @Transactional

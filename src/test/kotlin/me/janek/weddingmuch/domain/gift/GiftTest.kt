@@ -14,7 +14,7 @@ class GiftTest {
     val createRequest = GiftCreateRequest(name = "테스터", price = 100_000, memo = null)
 
     // when
-    val newGift = Gift.of(createRequest)
+    val newGift = Gift.of(createRequest, userToken ="1")
 
     //then
     assertThat(newGift.token).isNotBlank()

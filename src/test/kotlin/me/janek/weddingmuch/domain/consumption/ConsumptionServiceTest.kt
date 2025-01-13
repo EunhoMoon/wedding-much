@@ -38,7 +38,7 @@ class ConsumptionServiceTest @Autowired constructor(
   @DisplayName("소비 내역이 정상 수정된다.")
   fun updateConsumption() {
     // given
-    val newConsumption = Consumption.of(ConsumptionCreateRequest("스드메", 3_000_000, "스드메 비용"))
+    val newConsumption = Consumption.of(ConsumptionCreateRequest("스드메", 3_000_000, "스드메 비용"), userToken ="1")
     consumptionRepository.save(newConsumption)
     val consumptionUpdateRequest =
       ConsumptionUpdateRequest(newConsumption.token, place = "스드메", price = 3_500_000, memo = "스드메 비용")
@@ -56,7 +56,7 @@ class ConsumptionServiceTest @Autowired constructor(
   @DisplayName("수정하고자 하는 소비 내역을 찾을 수 없을 경우 예외 발생")
   fun updateConsumptionFailWhenTokenIsNotExists() {
     // given
-    val newConsumption = Consumption.of(ConsumptionCreateRequest("스드메", 3_000_000, "스드메 비용"))
+    val newConsumption = Consumption.of(ConsumptionCreateRequest("스드메", 3_000_000, "스드메 비용"), userToken ="1")
     consumptionRepository.save(newConsumption)
     val consumptionUpdateRequest =
       ConsumptionUpdateRequest(token = "not_exist_token", place = "스드메", price = 3_500_000, memo = "스드메 비용")
@@ -76,9 +76,9 @@ class ConsumptionServiceTest @Autowired constructor(
     val consumption3 = ConsumptionCreateRequest("항공권", 2_500_000, "항공권 비용")
     consumptionRepository.saveAll(
       listOf(
-        Consumption.of(consumption1),
-        Consumption.of(consumption2),
-        Consumption.of(consumption3)
+        Consumption.of(consumption1, userToken ="1"),
+        Consumption.of(consumption2, userToken ="1"),
+        Consumption.of(consumption3, userToken ="1")
       )
     )
 

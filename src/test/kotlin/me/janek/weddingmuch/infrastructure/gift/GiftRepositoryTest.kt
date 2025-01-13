@@ -20,9 +20,9 @@ class GiftRepositoryTest @Autowired constructor(
   fun findAllGifts() {
     // given
     arrayOf(
-      Gift(token = "token1", name = "name1", memo = null, price = 1_000),
-      Gift(token = "token2", name = "name2", memo = null, price = 2_000),
-      Gift(token = "token3", name = "name3", memo = "테스트", price = 3_000),
+      Gift(token = "token1", name = "name1", memo = null, price = 1_000, userToken ="1"),
+      Gift(token = "token2", name = "name2", memo = null, price = 2_000, userToken ="1"),
+      Gift(token = "token3", name = "name3", memo = "테스트", price = 3_000, userToken ="1"),
     )
       .toList()
       .let { giftRepository.saveAll(it) }
@@ -43,7 +43,7 @@ class GiftRepositoryTest @Autowired constructor(
   @DisplayName("토큰 값을 통해 축의 내역을 조회한다.")
   fun findByToken() {
     // given
-    Gift(token = "token1", name = "name1", memo = null, price = 1_000)
+    Gift(token = "token1", name = "name1", memo = null, price = 1_000, userToken ="1")
       .let { giftRepository.save(it) }
 
     // when
@@ -72,7 +72,7 @@ class GiftRepositoryTest @Autowired constructor(
   @DisplayName("토큰 값을 통해 축의 내역을 삭제한다.")
   fun deleteByToken() {
     // given
-    Gift(token = "token1", name = "name1", memo = null, price = 1_000)
+    Gift(token = "token1", name = "name1", memo = null, price = 1_000, userToken ="1")
       .let { giftRepository.save(it) }
 
     // when

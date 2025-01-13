@@ -17,7 +17,7 @@ class ConsumptionServiceImpl(
 
   @Transactional
   override fun saveNewConsumption(createRequest: ConsumptionCreateRequest) {
-    Consumption.of(createRequest).let { consumptionRepository.save(it) }
+    Consumption.of(createRequest, "1").let { consumptionRepository.save(it) }
   }
 
   @Transactional
