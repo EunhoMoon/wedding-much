@@ -22,6 +22,12 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://wedding-db:3306/wedding
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+jwt:
+  issuer: ${JWT_ISSUER}
+  secret_key: ${JWT_SECRET_KEY}
 
 ---
 spring:
