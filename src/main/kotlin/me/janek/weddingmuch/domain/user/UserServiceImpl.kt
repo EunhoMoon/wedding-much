@@ -2,7 +2,11 @@ package me.janek.weddingmuch.domain.user
 
 import me.janek.weddingmuch.api.user.UserCreateRequest
 import me.janek.weddingmuch.api.user.UserDetailsResponse
+import me.janek.weddingmuch.api.user.UserLoginRequest
 import me.janek.weddingmuch.infrastructure.user.UserRepository
+import me.janek.weddingmuch.utils.JwtProvider
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -12,13 +16,15 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class UserServiceImpl(
   private val userRepository: UserRepository,
-  private val passwordEncoder: BCryptPasswordEncoder
+  private val passwordEncoder: BCryptPasswordEncoder,
+  private val authenticationManagerBuilder: AuthenticationManagerBuilder,
+  private val jwtProvider: JwtProvider,
 ) : UserService {
 
   @Transactional
   override fun saveNewUser(createRequest: UserCreateRequest) {
     userRepository.findByUsername(createRequest.email)
-      ?.let { throw IllegalArgumentException("User already exists with username: ${createRequest.email}") }
+      ?.let { throw IllegalArgumentException("이미 존재하는 사용자입니다.: ${createRequest.email}") }
 
     User.of(username = createRequest.email, encryptPassword = passwordEncoder.encode(createRequest.password))
       .let { userRepository.save(it) }
@@ -26,13 +32,20 @@ class UserServiceImpl(
 
   override fun getUserByToken(token: String): User {
     return userRepository.findByToken(token)
-      ?: throw IllegalArgumentException("User not found with token: $token")
+      ?: throw IllegalArgumentException("해당하는 사용자를 찾을 수 없습니다.: $token")
+  }
+
+  override fun login(loginRequest: UserLoginRequest): String {
+    val authenticationToken = UsernamePasswordAuthenticationToken(loginRequest.email, loginRequest.password)
+    val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
+
+    return jwtProvider.generateToken(authentication.principal as UserDetailsResponse)
   }
 
   override fun loadUserByUsername(username: String): UserDetails {
     return userRepository.findByUsername(username)
       ?.let { UserDetailsResponse.from(it) }
-      ?: throw IllegalArgumentException("User not found with username: $username")
+      ?: throw IllegalArgumentException("해당하는 사용자를 찾을 수 없습니다.: $username")
   }
 
 }

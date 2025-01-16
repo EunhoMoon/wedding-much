@@ -1,11 +1,12 @@
 package me.janek.weddingmuch.utils
 
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.MalformedJwtException
 import io.jsonwebtoken.UnsupportedJwtException
 import io.jsonwebtoken.security.Keys
 import me.janek.weddingmuch.api.user.UserDetailsResponse
-import me.janek.weddingmuch.domain.user.UserService
+import me.janek.weddingmuch.infrastructure.user.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -13,19 +14,21 @@ import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 import java.util.*
 import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 import kotlin.time.toJavaDuration
 
 @Component
 class JwtProvider(
   private val jwtProperties: JwtProperties,
-  private val userService: UserService
+  private val userRepository: UserRepository
 ) {
 
   private val SECRET_KEY = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray(StandardCharsets.UTF_8))
 
   private val log = LoggerFactory.getLogger(this::class.java)
 
-  fun generateToken(user: UserDetailsResponse, expiredAt: Duration): String {
+  fun generateToken(user: UserDetailsResponse, expiredAt: Duration = 10.toDuration(DurationUnit.MINUTES)): String {
     val now = Date()
     return createToken(Date(now.time + expiredAt.toJavaDuration().toMillis()), user)
   }
@@ -37,6 +40,7 @@ class JwtProvider(
       .expiration(expiry)
       .subject(user.username)
       .claim("userToken", user.token)
+      .claim("authorities", user.authorities)
       .signWith(SECRET_KEY, Jwts.SIG.HS512)
       .compact()
 
@@ -45,22 +49,23 @@ class JwtProvider(
       getUserTokenFromJwtToken(jwtToken)
 
       return true
-    } catch (e: SecurityException) {
-      log.info("잘못된 서명입니다.")
-    } catch (e: MalformedJwtException) {
-      log.info("잘못된 서명입니다.")
-    } catch (e: UnsupportedJwtException) {
-      log.info("지원되지 않는 토큰입니다.")
-    } catch (e: IllegalArgumentException) {
-      log.info("잘못된 토큰입니다.")
+    } catch (e: Exception) {
+      when (e) {
+        is SecurityException -> log.error("Invalid JWT Token")
+        is MalformedJwtException -> log.error("Invalid JWT Token")
+        is ExpiredJwtException -> log.error("Expired JWT Token")
+        is UnsupportedJwtException -> log.error("Unsupported JWT Token")
+        is IllegalArgumentException -> log.error("JWT claims string is empty")
+        else -> log.error("Unknown Exception")
+      }
+      log.error(e.message)
     }
-
     return false
   }
 
   fun getAuthentication(jwtToken: String): Authentication =
     getUserTokenFromJwtToken(jwtToken).toString()
-      .let { userService.getUserByToken(it) }
+      .let { userRepository.findByToken(it) ?: throw IllegalArgumentException("해당하는 사용자를 찾을 수 없습니다.: $it") }
       .let { UserDetailsResponse.from(it) }
       .let { UsernamePasswordAuthenticationToken(it, jwtToken, it.authorities) }
 
