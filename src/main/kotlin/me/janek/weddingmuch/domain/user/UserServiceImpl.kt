@@ -22,7 +22,7 @@ class UserServiceImpl(
     @Transactional
     override fun saveNewUser(createRequest: UserCreateRequest) {
         userRepository.findByUsername(createRequest.email)
-            ?.let { throw IllegalArgumentException("이미 존재하는 사용자입니다.: ${createRequest.email}") }
+            ?.let { throw IllegalArgumentException("User already exists with username: ${createRequest.email}") }
 
         User.of(username = createRequest.email, encryptPassword = passwordEncoder.encode(createRequest.password))
             .let { userRepository.save(it) }
@@ -30,7 +30,7 @@ class UserServiceImpl(
 
     override fun getUserByToken(token: String): User {
         return userRepository.findByToken(token)
-            ?: throw IllegalArgumentException("해당하는 사용자를 찾을 수 없습니다.: $token")
+            ?: throw IllegalArgumentException("User not found with username: $token")
     }
 
     override fun login(loginRequest: UserLoginRequest): TokenInfo {
@@ -43,7 +43,7 @@ class UserServiceImpl(
     override fun loadUserByUsername(username: String): UserDetails {
         return userRepository.findByUsername(username)
             ?.let { UserDetailsResponse.from(it) }
-            ?: throw IllegalArgumentException("해당하는 사용자를 찾을 수 없습니다.: $username")
+            ?: throw IllegalArgumentException("User not found with username: $username")
     }
 
     override fun refreshAccessToken(tokenRefreshRequest: TokenRequest): TokenInfo {
