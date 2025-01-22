@@ -1,4 +1,4 @@
-package me.janek.weddingmuch.utils
+package me.janek.weddingmuch.domain.authority
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component

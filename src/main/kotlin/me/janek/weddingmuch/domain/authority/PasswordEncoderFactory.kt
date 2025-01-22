@@ -1,4 +1,4 @@
-package me.janek.weddingmuch.utils
+package me.janek.weddingmuch.domain.authority
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder

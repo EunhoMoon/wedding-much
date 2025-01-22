@@ -20,8 +20,14 @@ class UserController(
   }
 
   @PostMapping("/login")
-  fun login(@RequestBody login: UserLoginRequest): ResponseEntity<String> {
+  fun login(@RequestBody login: UserLoginRequest): ResponseEntity<TokenInfo> {
     val token = userService.login(login)
+    return ResponseEntity.ok(token)
+  }
+
+  @PostMapping("/refresh")
+  fun refreshAccessToken(@RequestBody tokenRefreshRequest: TokenRequest): ResponseEntity<TokenInfo> {
+    val token = userService.refreshAccessToken(tokenRefreshRequest)
     return ResponseEntity.ok(token)
   }
 
