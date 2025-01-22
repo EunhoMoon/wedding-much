@@ -1,15 +1,14 @@
-package me.janek.weddingmuch.config
+package me.janek.weddingmuch.domain.authority
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import me.janek.weddingmuch.utils.JwtProvider
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
 class JwtAuthenticationFilter(
-  private val jwtProvider: JwtProvider
+  private val jwtProvider: JwtProviderImpl
 ) : OncePerRequestFilter() {
 
   companion object {

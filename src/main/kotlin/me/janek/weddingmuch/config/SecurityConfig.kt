@@ -1,6 +1,7 @@
 package me.janek.weddingmuch.config
 
-import me.janek.weddingmuch.utils.JwtProvider
+import me.janek.weddingmuch.domain.authority.JwtAuthenticationFilter
+import me.janek.weddingmuch.domain.authority.JwtProviderImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -14,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfig(
   private val passwordEncoder: BCryptPasswordEncoder,
-  private val jwtProvider: JwtProvider
+  private val jwtProvider: JwtProviderImpl
 ) {
 
   @Bean

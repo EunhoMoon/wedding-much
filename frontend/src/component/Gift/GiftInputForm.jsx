@@ -7,7 +7,7 @@ const initGift = {
   memo: ''
 };
 
-const InputForm = props => {
+const GiftInputForm = props => {
   const [newGift, setNewGift] = useState(initGift);
 
   const setProperties = (e) => {
@@ -34,4 +34,4 @@ const InputForm = props => {
   );
 };
 
-export default InputForm;
+export default GiftInputForm;
