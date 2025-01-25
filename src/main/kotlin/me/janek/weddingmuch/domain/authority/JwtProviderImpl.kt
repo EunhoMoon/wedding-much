@@ -25,7 +25,7 @@ class JwtProviderImpl(
     private val userRepository: UserRepository
 ) : JwtProvider {
 
-    private val SECRET_KEY = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray(StandardCharsets.UTF_8))
+    private final val SECRET_KEY = Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray(StandardCharsets.UTF_8))
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
