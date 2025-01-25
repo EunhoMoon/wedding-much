@@ -1,5 +1,5 @@
 import React, {Fragment, useCallback, useEffect, useState} from 'react';
-import classes from "../../css/App.module.css";
+import classes from "./css/Gift.module.css";
 import GiftInputForm from "./GiftInputForm";
 import GiftHeader from "./GiftHeader";
 import GiftTable from "./GiftTable";
