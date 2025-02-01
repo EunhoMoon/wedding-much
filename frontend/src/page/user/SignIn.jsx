@@ -106,7 +106,7 @@ export const SignIn = () => {
             <div className={classes.buttonWrapper}>
               <Button type="submit" variant="contained" color="success" className={classes.button}
                       onClick={signInHandler}>Sign-in</Button>
-              <Button variant="outlined" color="success" className={classes.button}>Sigh-Up</Button>
+              <Button variant="outlined" color="success" className={classes.button}>Sign-Up</Button>
               <Button variant="outlined" color="warning" className={classes.button}>KaKao</Button>
               <Button variant="outlined" color="info" className={classes.button}>Google</Button>
             </div>
