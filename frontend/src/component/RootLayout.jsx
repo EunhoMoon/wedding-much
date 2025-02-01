@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {Outlet} from "react-router-dom";
-import Header from "../component/Header";
+import Header from "./Header";
 
 const RootLayout = () => {
   return (

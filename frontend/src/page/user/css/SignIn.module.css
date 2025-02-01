@@ -1,0 +1,53 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 5%;
+}
+
+.loginBox {
+    width: 35vw;
+    min-width: 350px;
+    height: 40vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleWrapper {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.titleWrapper h2 {
+    font-size: 40px;
+}
+
+.userForm {
+    width: 80%;
+}
+
+.userInput {
+    width: 100%;
+}
+
+.userInputError {
+    color: #d32f2f;
+}
+
+.inputWrapper {
+    margin: 10px 0;
+}
+
+.button {
+    width: 24%;
+    height: 50px;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
