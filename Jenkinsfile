@@ -4,21 +4,33 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                echo 'Building..'
+                sh "./gradlew clean test --info --parallel"
             }
         }
 
-        stage('Test') {
+        stage('Build') {
             steps {
-                echo 'Testing..'
+                sh "docker build -t eunhomoon/wedding:${RELEASE_TAG} ."
             }
         }
+
+        //stage('push to docker hub') {
+        //    steps {
+        //        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        //            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+        //            sh "docker push eunhomoon/wedding:${RELEASE_TAG}"
+        //        }
+        //    }
+        //}
 
         stage('Deploy') {
             steps {
-                echo 'Deploy..'
+                dir('/home/janek/wedding') {
+                    sh "docker compose up -d --build"
+
+                }
             }
         }
     }
