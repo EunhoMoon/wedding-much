@@ -4,11 +4,16 @@ pipeline {
     }
 
     stages {
-        //stage('Test') {
-        //    steps {
-        //        sh "./gradlew clean test --info --parallel"
-        //    }
-        //}
+        stage('Test') {
+            agent {
+                docker {
+                    image 'amazoncorretto:17'
+                }
+            }
+            steps {
+                sh "./gradlew clean test --info --parallel"
+            }
+        }
 
         stage('Build') {
             steps {
@@ -16,14 +21,14 @@ pipeline {
             }
         }
 
-        //stage('push to docker hub') {
-        //    steps {
-        //        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        //            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        //            sh "docker push eunhomoon/wedding:${RELEASE_TAG}"
-        //        }
-        //    }
-        //}
+        stage('push to docker hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                    sh "docker push eunhomoon/wedding:${RELEASE_TAG}"
+                }
+            }
+        }
 
         stage('Deploy') {
             steps {
