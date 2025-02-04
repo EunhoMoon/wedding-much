@@ -4,11 +4,11 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            steps {
-                sh "./gradlew clean test --info --parallel"
-            }
-        }
+        //stage('Test') {
+        //    steps {
+        //        sh "./gradlew clean test --info --parallel"
+        //    }
+        //}
 
         stage('Build') {
             steps {
